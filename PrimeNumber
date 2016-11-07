@@ -1,0 +1,42 @@
+class SearchOfPrime {
+
+    int[] massPrime = new int[100];
+
+    public void whichIsPrime(int howManyDigits) {
+
+        SearchOfPrime nextIt = new SearchOfPrime();
+
+        for (int z = 2, count = 0; count <= howManyDigits ; z++, count++) {
+            if (count != howManyDigits) {
+                if (nextIt.isItPrime(z) != 0) {
+                    massPrime[count] = nextIt.isItPrime(z);
+                }
+            }
+        }
+        for (int index = 0; index < massPrime.length; index++)
+            System.out.println(massPrime[index]);
+    }
+ //второй метод - проверка числа на простое.
+    public int isItPrime(int i) {
+        int summ = 0;
+        int j = 0;
+        for (int check = 2; check < i; check++) {
+            if (i % check != 0) {
+                summ++;
+            } else {
+                break;
+            }
+        }
+        if (summ == i)
+            j = i;
+        return j;
+    }
+}
+
+public class PrimeNumber {
+    public static void main(String[] args) {
+
+        SearchOfPrime primeNumb = new SearchOfPrime();
+        primeNumb.whichIsPrime(5);
+    }
+}
