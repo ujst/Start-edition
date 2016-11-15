@@ -2,41 +2,63 @@ class SearchOfPrime {
 
     int[] massPrime = new int[100];
 
+// первый метод - вывод простых чисел.
     public void whichIsPrime(int howManyDigits) {
+
+        massPrime[0] = 2;
+        massPrime[1] = 3;
+
+        int z = 4, count = 2;
 
         SearchOfPrime nextIt = new SearchOfPrime();
 
-        for (int z = 2, count = 0; count <= howManyDigits ; z++, count++) {
-            if (count != howManyDigits) {
-                if (nextIt.isItPrime(z) != 0) {
-                    massPrime[count] = nextIt.isItPrime(z);
+        // если необходимо вывести одно или два первых простых числа
+        if (howManyDigits == 1)
+            System.out.println(massPrime[0]);
+        else if (howManyDigits == 2) {
+            System.out.println(massPrime[0]);
+            System.out.println(massPrime[1]);
+
+            // если надо вывести больше двух простых чисел
+        } else if (howManyDigits > 3) {
+
+            while (count != howManyDigits) {
+
+                if (nextIt.isItPrime(z) == true) {
+                    massPrime[count] = z;
+                    z++;
+                    count++;
+                    System.out.println("Раз");
+                } else if (nextIt.isItPrime(z) == false) {
+                    z++;
+                    System.out.println("Два");
                 }
             }
+            System.out.println("Три");
+
+            for (int index = 0; index < massPrime.length; index++)
+                if (massPrime[index] > 0)
+                    System.out.println(massPrime[index]);
         }
-        for (int index = 0; index < massPrime.length; index++)
-            System.out.println(massPrime[index]);
     }
  //второй метод - проверка числа на простое.
-    public int isItPrime(int i) {
-        int summ = 0;
-        int j = 0;
+    public boolean isItPrime(int i) {
+        boolean j = false;
         for (int check = 2; check < i; check++) {
             if (i % check != 0) {
-                summ++;
+                j = true;
             } else {
+                j = false;
                 break;
             }
         }
-        if (summ == i)
-            j = i;
         return j;
     }
 }
 
 public class PrimeNumber {
     public static void main(String[] args) {
-
         SearchOfPrime primeNumb = new SearchOfPrime();
-        primeNumb.whichIsPrime(5);
+        primeNumb.whichIsPrime(18);
     }
 }
