@@ -1,0 +1,95 @@
+import java.util.Random;
+
+class RandomMass {
+
+    //Создание рандомной квадратной матрицы
+    int[][] matrix;
+
+    //Создание массива Основной Диагонали рандомной матрицы
+    int[] mainDiag;
+
+    //Наполнение рандомной квадратной матрицы рандомными числами
+    public int [][] createMass(int randDigit) {
+
+        matrix = new int[randDigit][randDigit];
+
+        Random rand = new Random();
+
+        for (int i = 0; i < randDigit; i++)
+            for (int j = 0; j < randDigit; j++)
+                matrix [i][j] = rand.nextInt(100);
+
+        return matrix;
+    }
+
+    //Наполнение массива Основной Диагонали рандомной матрицы
+    public int[] diagMass(int randDigit) {
+        mainDiag = new int[randDigit];
+
+        for (int n = 0, i = 0; n < matrix.length; n++, i++) {
+            mainDiag[i] = matrix[n][n];
+        }
+        return  mainDiag;
+    }
+
+    //Пузырьковая сортировка массива Основной Диагонали
+    public int[] bubbleSort(int[] mass) {
+        mass = mainDiag;
+
+        for (int i = 0; i < mass.length; i++)
+            for (int j = 0; j < i; j++) {
+                if (mass[j] > mass[i]) {
+                    int temp = mass[i];
+                    mass[i] = mass[j];
+                    mass[j] = temp;
+                }
+            }
+        return mass;
+    }
+}
+
+public class MassBubleSort {
+    public static void main(String[] args) {
+
+        RandomMass baseMass = new RandomMass();
+
+        int index = 7;
+
+
+        // Рандомная матрица
+        baseMass.createMass(index);
+
+        System.out.println("Рандомная матрица: ");
+
+        for (int i = 0; i < baseMass.matrix.length; i++ ) {
+            for (int j = 0; j < baseMass.matrix.length; j++) {
+                System.out.print(baseMass.matrix[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
+
+        System.out.println(" ");
+
+
+        // Основная Диагональ
+        System.out.println("Основная диагональ: ");
+
+        baseMass.diagMass(index);
+
+        for (int j = 0; j < baseMass.mainDiag.length; j++) {
+            System.out.print(baseMass.mainDiag[j] + " ");
+        }
+
+        System.out.println(" ");
+
+
+        // Отсортированная Основная Диагональ
+        System.out.println("Отсортированная Основная Диагональ:  ");
+
+        baseMass.bubbleSort(baseMass.mainDiag);
+
+        for (int j = 0; j < baseMass.mainDiag.length; j++) {
+            System.out.print(baseMass.mainDiag[j] + " ");
+        }
+    }
+}
